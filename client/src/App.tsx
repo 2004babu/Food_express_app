@@ -1,12 +1,12 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 
 import { ToastContainer } from 'react-toastify'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import auth from './firebase'
-import { clearUser, setUser } from './components/Redux/userSlice'
-import axios from 'axios'
-import { useDispatch } from 'react-redux'
+// import auth from './firebase'
+// import { clearUser, setUser } from './components/Redux/userSlice'
+// import axios from 'axios'
+// import { useDispatch } from 'react-redux'
 import Orders from './pages/Orders'
 import CartPage from './components/cart/page'
 import CheckOut from './pages/CheckOut'
@@ -24,37 +24,37 @@ function App() {
 
   // const [isloaded, setIsLoaded] = useState<boolean>(false);
 
-  const dispatch = useDispatch()
-  useEffect(() => {
-    const unsubcribe = auth.onAuthStateChanged(async (firebaseUser) => {
-      // setIsLoaded(true)
+  // const dispatch = useDispatch()
+  // useEffect(() => {
+  //   const unsubcribe = auth.onAuthStateChanged(async (firebaseUser) => {
+  //     // setIsLoaded(true)
 
-      if (firebaseUser) {
-        const token = await firebaseUser?.getIdToken()
+  //     if (firebaseUser) {
+  //       const token = await firebaseUser?.getIdToken()
 
-        const apiurl = import.meta.env.VITE_BACKEND_URL
+  //       const apiurl = import.meta.env.VITE_BACKEND_URL
 
-        if (token) {
-          localStorage.setItem('pizzatoken', token);
-        }
+  //       if (token) {
+  //         localStorage.setItem('pizzatoken', token);
+  //       }
 
-        const response = await axios.post(apiurl + '/auth/emailSignup', {}, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
-        if (response.data.user) {
-          dispatch(setUser(response.data.user))
-        }
-      } else {
-        dispatch(clearUser())
-      }
+  //       const response = await axios.post(apiurl + '/auth/emailSignup', {}, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
+  //       if (response.data.user) {
+  //         dispatch(setUser(response.data.user))
+  //       }
+  //     } else {
+  //       dispatch(clearUser())
+  //     }
 
 
-    })
+  //   })
 
-    const getNOtificationPermission = async () => await Notification.requestPermission()
+  //   const getNOtificationPermission = async () => await Notification.requestPermission()
 
-    getNOtificationPermission()
+  //   getNOtificationPermission()
 
-    return () => { unsubcribe() }
-  }, []);
+  //   return () => { unsubcribe() }
+  // }, []);
 
 
 
